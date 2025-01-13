@@ -7,8 +7,8 @@ class submissionService{
     async pingCheck(){
         return 'pong';
     }
-    async addSubmission(submission){
-        const submission = this.submissionRepository.addSubmission(submission);
+    async addSubmission(submissionPayload){
+        const submission = await this.submissionRepository.addSubmission(submissionPayload);
         if(!submission){
             // add error handling
             throw {message:"Not able to create submission"};
