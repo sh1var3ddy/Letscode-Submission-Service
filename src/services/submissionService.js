@@ -10,6 +10,7 @@ class submissionService{
     }
     async addSubmission(submissionPayload){
         const problemId = submissionPayload.problemId;
+        const userId = submissionPayload.userId;
         const problemAdminApiResponse = await fetchProblemDetails(problemId);
         if(!problemAdminApiResponse){
             throw new Error("Failed to create a submission in the repo");
@@ -29,7 +30,9 @@ class submissionService{
                 code:submission.code,
                 language:submission.language,
                 inputCase:problemAdminApiResponse.data.testCases[0].input,
-                outputCase:problemAdminApiResponse.data.testCases[0].output
+                outputCase:problemAdminApiResponse.data.testCases[0].output,
+                userId,
+                submissionId:submission._id,
             }
         });
         return {queueResponse:response,submission};
